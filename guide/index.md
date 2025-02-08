@@ -1,7 +1,3 @@
----
-outline: deep
----
-
 # 简介
 
 **[cjbind](https://github.com/cjbind/cjbind) 可以自动生成仓颉的 C FFI 绑定代码。**
@@ -25,12 +21,6 @@ typedef struct {
     int age;
     char name[32];
 } Animal;
-
-union Data {
-    int i;
-    float f;
-    char c;
-};
 
 void print_animal(const Animal* animal);
 

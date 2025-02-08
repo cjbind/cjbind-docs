@@ -4,6 +4,9 @@ import cangjie from './cangjie.tmLanguage.json'
 
 const GUIDES: DefaultTheme.NavItemWithLink[] = [
   { text: '快速开始', link: '/guide/' },
+  { text: '安装', link: '/guide/install' },
+  { text: '命令行使用', link: '/guide/command_line' },
+  { text: '限制', link: '/guide/limitation' },
 ]
 
 export default defineConfig({
@@ -17,6 +20,13 @@ export default defineConfig({
     },
     shikiSetup: async (shiki) => {
       await shiki.loadLanguage(cangjie)
+    },
+    container: {
+      tipLabel: '提示',
+      warningLabel: '警告',
+      dangerLabel: '危险',
+      infoLabel: '信息',
+      detailsLabel: '详细信息'
     }
   },
 
