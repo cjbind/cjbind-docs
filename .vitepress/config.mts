@@ -113,6 +113,9 @@ export default defineConfig({
       }
     ]
   ],
+  sitemap: {
+    hostname: 'https://cjbind.zxilly.dev',
+  },
   lastUpdated: true,
   cleanUrls: true,
 })
