@@ -93,6 +93,16 @@ export default defineConfig({
     lightModeSwitchTitle: '切换到浅色模式',
     darkModeSwitchTitle: '切换到深色模式',
   },
+  head: [
+    [
+      'script',
+      {
+        defer: "true",
+        src: 'https://trail.learningman.top/script.js',
+        'data-website-id': 'ee8c2794-9441-4be4-8fb1-185cbda5c3a6'
+      }
+    ]
+  ],
   lastUpdated: true,
   cleanUrls: true,
 })
