@@ -6,7 +6,7 @@ const GUIDES: DefaultTheme.NavItemWithLink[] = [
   { text: '快速开始', link: '/guide/' },
   { text: '安装', link: '/guide/install' },
   { text: '命令行使用', link: '/guide/command_line' },
-  { text: '限制', link: '/guide/limitation' },
+  { text: '已知限制', link: '/guide/limitation' },
 ]
 
 export default defineConfig({
