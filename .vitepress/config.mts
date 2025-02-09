@@ -125,6 +125,7 @@ export default defineConfig({
   sitemap: {
     hostname: 'https://cjbind.zxilly.dev',
   },
+  srcExclude: ['README.md'],
   lastUpdated: true,
   cleanUrls: true,
 })
