@@ -2,9 +2,9 @@
 
 如果已经按照 [安装](/guide/install) 中的说明安装了 `cjbind`，并且可以通过 `cjbind --version` 命令查看版本号，那么你可以使用 `cjbind` 命令来生成 FFI 绑定代码。
 
-`cjbind` 命令接收一个 C 或 C++ 头文件路径作为输入，并可选地指定生成绑定的输出文件路径。如果未提供输出文件路径，绑定代码将输出到 `stdout`。
+`cjbind` 命令接收一个 C 头文件路径作为输入，并可选地指定生成绑定的输出文件路径。如果未提供输出文件路径，绑定代码将输出到 `stdout`。
 
-如果我们要从名为 `library.h` 的 C 头文件生成 Rust FFI 绑定，并将其放入 `cjbind_ffi.cj` 文件中，可以这样调用 `cjbind`：
+如果我们要从名为 `library.h` 的 C 头文件生成 仓颉 FFI 绑定，并将其放入 `cjbind_ffi.cj` 文件中，可以这样调用 `cjbind`：
 
 ```bash
 $ cjbind library.h -o cjbind_ffi.cj
@@ -14,7 +14,7 @@ $ cjbind library.h -o cjbind_ffi.cj
 
 ```bash
 $ cjbind --help
-自动生成仓颉到 C 库的 FFI 绑定代码。
+自动生成 C 库到仓颉的 FFI 绑定代码。
 
 用法：cjbind <OPTIONS> <HEADER> -- <CLANG_ARGS>
 
