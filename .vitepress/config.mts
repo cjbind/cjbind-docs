@@ -102,6 +102,15 @@ export default defineConfig({
     darkModeSwitchLabel: '主题',
     lightModeSwitchTitle: '切换到浅色模式',
     darkModeSwitchTitle: '切换到深色模式',
+    lastUpdated: {
+      text: '上次更新于',
+      formatOptions: {
+        dateStyle: 'short',
+        timeStyle: 'short',
+        hour12: false,
+        timeZone: 'Asia/Shanghai'
+      }
+    }
   },
   head: [
     [
