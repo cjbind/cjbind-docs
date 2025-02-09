@@ -3,7 +3,7 @@ layout: home
 
 hero:
   name: "cjbind"
-  tagline: 自动生成仓颉到 C 库的 FFI 绑定代码
+  tagline: 自动生成 C 库到仓颉的 FFI 绑定代码
   actions:
     - theme: brand
       text: 快速开始

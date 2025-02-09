@@ -1,6 +1,6 @@
 # 简介
 
-**[cjbind](https://github.com/cjbind/cjbind) 可以自动生成仓颉的 C FFI 绑定代码。**
+**[cjbind](https://github.com/cjbind/cjbind) 可以自动生成 C 的仓颉 FFI 绑定代码。**
 
 例如，假设有如下的 C 头文件 *example.h*:
 
@@ -29,7 +29,7 @@ int compute_sum(int a, int b);
 #endif
 ```
 
-使用 cjbind 后，将生成仓颉的 FFI 绑定代码，允许你调用 C 库中的函数并使用其类型：
+使用 cjbind 后，将生成仓颉 FFI 绑定代码，允许你调用 C 库中的函数并使用其类型：
 
 ```cangjie
 // cjbind 0.1.0 生成，请勿编辑, DO NOT EDIT
