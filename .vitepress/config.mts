@@ -78,7 +78,7 @@ export default defineConfig({
     },
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/cjbind/cjbin' },
+      { icon: 'github', link: 'https://github.com/cjbind/cjbind' },
     ],
 
     footer: {
