@@ -8,8 +8,6 @@
 #ifndef CANGJIE_H
 #define CANGJIE_H
 
-#include <stdio.h>
-
 typedef enum {
     CAT,
     DOG,
