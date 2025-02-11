@@ -14,13 +14,15 @@
 
 ```bash
 $ cjbind --version
-cjbind 版本：	0.1.1
+cjbind 版本：	0.1.2
 
-Commit Hash：	fab61819eb107bd5ed5f3ea0dfc9abedaf49db6f
-Commit 时间： 2025-02-08 05:24:45 +0800
+Commit Hash：	9d4f3def57271604b2cdc1bc2afc717425eea1de
+Commit 时间：	2025-02-12 04:09:41 +0800
 开发分支：	master
-标签：	v0.1.1
+标签：	v0.1.2
 洁净构建：	true
+
+libclang 版本：	clang version 19.1.7 (git://code.qt.io/clang/llvm-project.git cd708029e0b2869e80abe31ddb175f7c35361f90)
 ```
 
 ## 源码安装

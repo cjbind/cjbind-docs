@@ -7,24 +7,25 @@
 如果我们要从名为 `library.h` 的 C 头文件生成仓颉 FFI 绑定，并将其放入 `cjbind_ffi.cj` 文件中，可以这样调用 `cjbind`：
 
 ```bash
-$ cjbind library.h -o cjbind_ffi.cj
+$ cjbind -o cjbind_ffi.cj library.h
 ```
 
 要查看更详细的帮助信息，请传递 `--help` 参数：
 
-```bash
+```text
 $ cjbind --help
 自动生成仓颉到 C 库的 FFI 绑定代码。
 
 用法：cjbind <OPTIONS> <HEADER> -- <CLANG_ARGS>
 
 参数：
-    <HEADER>    C 头文件路径
-    [CLANG_ARGS]...     会被直接传递给 clang 的参数
+    <HEADER>          C 头文件路径
+    [CLANG_ARGS]...   会被直接传递给 clang 的参数
 
 选项：
-    -o, --output        <OUTPUT> 把生成的绑定输出到文件
-    -p, --package       <PACKAGE> 指定生成的包名
-    -V, --version       显示版本号并退出
-    -h, --help          显示帮助信息
+        --no-enum-prefix      生成枚举时，不使用枚举名称作为枚举值的前缀
+    -o, --output <FILE>       把生成的绑定输出到文件
+    -p, --package <PACKAGE>   生成的绑定中的包名
+    -v, --version             显示版本号并退出
+    -h, --help                显示帮助信息
 ```
