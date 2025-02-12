@@ -6,7 +6,7 @@ hero:
   tagline: 自动生成 C 库到仓颉的 FFI 绑定代码
   actions:
     - theme: brand
-      text: 快速开始
+      text: 文档
       link: /guide/
 
 features:
