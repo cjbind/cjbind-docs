@@ -23,6 +23,21 @@ Commit 时间：   2025-02-12 04:38:33 +0800
 洁净构建：    true
 ```
 
+### 脚本安装
+
+#### Linux/macOS
+
+```shell
+curl -fsSL https://cjbind.zxilly.dev/install.sh | bash
+```
+
+#### Windows
+
+```powershell
+irm https://cjbind.zxilly.dev/install.ps1 | iex
+```
+
+
 ## 源码安装
 
 你可以查看 `cjbind` 源码中包含的 `DEVELOPMENT.md` 文件，里面包含了如何在本地构建 `cjbind` 和拉取依赖的详细步骤。
