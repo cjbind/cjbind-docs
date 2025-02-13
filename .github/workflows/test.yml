@@ -31,14 +31,18 @@ jobs:
           channel: "canary"
           token: ${{ secrets.GITCODE_TOKEN }}
 
-      - name: Test unix
+      - name: Test unix install
         if: matrix.os.sys != 'windows'
         run: |
           chmod +x public/install.sh
           bash public/install.sh
 
-      - name: Test windows
+      - name: Test windows install
         if: matrix.os.sys == 'windows'
         shell: msys2 {0}
         run: |
           powershell -File public/install.ps1
+
+      - name: Test cjbind
+        run: |
+          cjbind --version
