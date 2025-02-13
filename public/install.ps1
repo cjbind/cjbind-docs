@@ -2,7 +2,14 @@ Write-Host "`n=== 开始安装 cjbind ===" -ForegroundColor Cyan
 
 try {
     Write-Host "[1/3] 正在从GitHub获取最新版本..." -ForegroundColor Cyan
-    $releaseInfo = Invoke-RestMethod -Uri 'https://api.github.com/repos/cjbind/cjbind/releases/latest' -ErrorAction Stop
+    
+    $headers = @{}
+    if ($env:GITHUB_TOKEN) {
+        $headers["Authorization"] = "token $($env:GITHUB_TOKEN)"
+    }
+
+    $releaseInfo = Invoke-RestMethod -Uri 'https://api.github.com/repos/cjbind/cjbind/releases/latest' -Headers $headers -ErrorAction Stop
+    
     $latestTag = $releaseInfo.tag_name
     Write-Host "    √ 获取到最新版本：$latestTag" -ForegroundColor Green
 }

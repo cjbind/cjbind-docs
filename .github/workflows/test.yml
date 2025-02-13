@@ -36,12 +36,15 @@ jobs:
         run: |
           chmod +x public/install.sh
           bash public/install.sh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Test windows install
         if: matrix.os.sys == 'windows'
-        shell: msys2 {0}
         run: |
           powershell -File public/install.ps1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Test cjbind
         run: |

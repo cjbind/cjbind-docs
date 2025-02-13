@@ -23,7 +23,12 @@ step() { echo "${YELLOW}[$1/4] $2${RESET}"; }
 trap 'printf "\e[0m"' EXIT
 
 step 1 "获取最新版本"
-LATEST_TAG=$(curl -fsS https://api.github.com/repos/cjbind/cjbind/releases/latest | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/') || error "无法获取最新版本"
+
+LATEST_TAG=$(curl -fsS ${GITHUB_TOKEN:+-H "Authorization: token $GITHUB_TOKEN"} \
+  https://api.github.com/repos/cjbind/cjbind/releases/latest \
+  | grep '"tag_name":' \
+  | sed -E 's/.*"([^"]+)".*/\1/') || error "无法获取最新版本"
+
 success "检测到最新版本: $LATEST_TAG"
 
 step 2 "检测系统环境"
