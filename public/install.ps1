@@ -56,7 +56,7 @@ try {
     Write-Host "`n    √ 文件下载完成" -ForegroundColor Green
 
     $fileSize = (Get-Item $destination).Length / 1MB
-    Write-Host "    文件大小：{0:N2} MB" -f $fileSize
+    Write-Host ("    文件大小：{0:N2} MB" -f $fileSize) -ForegroundColor Cyan
 }
 catch {
     Write-Host "`n错误：下载失败 - $_" -ForegroundColor Red
