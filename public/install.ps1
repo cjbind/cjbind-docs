@@ -1,5 +1,4 @@
-﻿[System.Console]::OutputEncoding = [System.Text.Encoding]::GetEncoding(65001)
-$OutputEncoding = [System.Text.Encoding]::GetEncoding(65001)
+﻿$OutputEncoding = [Console]::OutputEncoding = [Text.UTF8Encoding]::UTF8
 
 Write-Host "`n=== 开始安装 cjbind ===" -ForegroundColor Cyan
 
