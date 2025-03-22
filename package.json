@@ -11,8 +11,8 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "packageManager": "pnpm@10.3.0",
+  "packageManager": "pnpm@10.6.5",
   "devDependencies": {
-    "vitepress": "2.0.0-alpha.2"
+    "vitepress": "2.0.0-alpha.4"
   }
 }

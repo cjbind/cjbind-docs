@@ -3,7 +3,7 @@ import type { DefaultTheme } from 'vitepress'
 import cangjie from './cangjie.tmLanguage.json'
 
 const GUIDES: DefaultTheme.NavItemWithLink[] = [
-  { text: '简洁', link: '/guide/' },
+  { text: '简介', link: '/guide/' },
   { text: '快速开始', link: '/guide/quick_start' },
   { text: '安装', link: '/guide/install' },
   { text: '命令行使用', link: '/guide/command_line' },
