@@ -1,5 +1,6 @@
 import { defineConfig } from 'vitepress'
 import type { DefaultTheme } from 'vitepress'
+import llmstxt from 'vitepress-plugin-llms'
 import cangjie from './cangjie.tmLanguage.json'
 
 const GUIDES: DefaultTheme.NavItemWithLink[] = [
@@ -8,6 +9,7 @@ const GUIDES: DefaultTheme.NavItemWithLink[] = [
   { text: '安装', link: '/guide/install' },
   { text: '命令行使用', link: '/guide/command_line' },
   { text: '已知限制', link: '/guide/limitation' },
+  { text: 'LLM', link: '/guide/llm' },
 ]
 
 export default defineConfig({
@@ -30,7 +32,12 @@ export default defineConfig({
       detailsLabel: '详细信息'
     }
   },
-
+  vite: {
+    plugins: [llmstxt({
+      domain: 'https://cjbind.zxilly.dev',
+      description: 'cjbind 是一个自动生成仓颉到 C 库的 FFI 绑定代码的工具',
+    })]
+  },
   themeConfig: {
     siteTitle: 'cjbind',
     nav: [
@@ -84,7 +91,7 @@ export default defineConfig({
 
     footer: {
       message: '以 MIT 许可证发布',
-      copyright: '版权所有 © 2024 - 现在 Zxilly',
+      copyright: `版权所有 © 2024 - ${new Date().getFullYear()} Zxilly`,
     },
 
     docFooter: {
