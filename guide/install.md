@@ -10,6 +10,35 @@
 因为仓颉当前不支持静态链接，因此运行 `cjbind` 时需要确保仓颉相关的环境变量已经配置好。
 :::
 
+::: warning
+cjbind 要求系统 glibc 版本 **最低 2.34**；如果低于此版本，将无法运行。
+
+- **主流发行版 glibc 版本：**
+  - Ubuntu 24.04 LTS: 2.39
+  - Debian 12 (Bookworm): 2.36
+  - Fedora 40: 2.39
+  - CentOS Stream 9 / RHEL 9: 2.34
+
+:::
+
+<details>
+<summary>完整列表</summary>
+
+| 发行版              | 版本          | glibc 版本 |
+| ------------------- | ------------- | ---------- |
+| Ubuntu              | 24.04 LTS     | 2.39       |
+| Debian              | 12 (Bookworm) | 2.36       |
+| Fedora              | 40            | 2.39       |
+| CentOS Stream       | 9             | 2.34       |
+| RHEL                | 9             | 2.34       |
+| openSUSE Tumbleweed | 滚动更新      | 2.41       |
+| Arch Linux          | 滚动更新      | 2.41       |
+| AlmaLinux           | 9             | 2.34       |
+| Rocky Linux         | 9             | 2.34       |
+| OpenEuler           | 22.03         | 2.34       |
+
+</details>
+
 你可以通过运行 `cjbind --version` 来检查是否安装成功。
 
 ```bash
@@ -36,7 +65,6 @@ curl -fsSL https://cjbind.zxilly.dev/install.sh | bash
 ```powershell
 irm https://cjbind.zxilly.dev/install.ps1 | iex
 ```
-
 
 ## 源码安装
 
