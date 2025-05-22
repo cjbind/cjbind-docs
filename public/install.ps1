@@ -1,5 +1,9 @@
-﻿$OutputEncoding = [Console]::OutputEncoding = [Text.UTF8Encoding]::UTF8
-
+﻿try {
+    [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+    $OutputEncoding = [System.Text.Encoding]::UTF8
+} catch {
+    $OutputEncoding = [System.Text.Encoding]::UTF8
+}
 # 检查是否使用镜像
 $UseMirror = $false
 foreach ($arg in $args) {
