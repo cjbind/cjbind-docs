@@ -1,5 +1,14 @@
 ﻿$OutputEncoding = [Console]::OutputEncoding = [Text.UTF8Encoding]::UTF8
 
+# 检查是否使用镜像
+$UseMirror = $false
+foreach ($arg in $args) {
+    if ($arg -eq "--mirror" -or $arg -eq "-m") {
+        $UseMirror = $true
+        break
+    }
+}
+
 Write-Host "`n=== 开始安装 cjbind ===" -ForegroundColor Cyan
 
 try {
@@ -30,7 +39,7 @@ try {
         Write-Host "    √ 目录创建成功" -ForegroundColor Green
     }
     else {
-        Write-Host "    ! 目录已存在，跳过创建" -ForegroundColor Yellow
+    Write-Host "    ! 目录已存在，跳过创建" -ForegroundColor Yellow
     }
 }
 catch {
@@ -38,10 +47,17 @@ catch {
     exit 1
 }
 
-$downloadUrl = "https://github.com/cjbind/cjbind/releases/download/$latestTag/cjbind-windows-x64.exe"
+if ($UseMirror) {
+    $downloadUrl = "https://gitcode.com/Cangjie-TPC/cjbind/releases/download/$latestTag/cjbind-windows-x64.exe"
+    $mirrorStatus = "是"
+} else {
+    $downloadUrl = "https://github.com/cjbind/cjbind/releases/download/$latestTag/cjbind-windows-x64.exe"
+    $mirrorStatus = "否"
+}
 $destination = "$targetDir\cjbind.exe"
 try {
     Write-Host "[3/3] 正在下载程序文件..." -ForegroundColor Cyan
+    Write-Host "    使用镜像：$mirrorStatus" -ForegroundColor Yellow
     Write-Host "    下载地址：$downloadUrl"
     Write-Host "    保存路径：$destination`n"
 

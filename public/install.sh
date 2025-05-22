@@ -1,6 +1,15 @@
 #!/bin/bash
 set -eo pipefail
 
+# 检查是否使用镜像源
+USE_MIRROR=false
+for arg in "$@"; do
+  if [ "$arg" = "--mirror" ] || [ "$arg" = "-m" ]; then
+    USE_MIRROR=true
+    break
+  fi
+done
+
 if [ -t 1 ]; then
   RED=$(printf '\033[31m')
   GREEN=$(printf '\033[32m')
@@ -58,7 +67,13 @@ mkdir -p "$TARGET_DIR" || error "无法创建目录: $TARGET_DIR"
 success "目录已创建: ${TARGET_DIR/#$HOME/~}"
 
 step 4 "下载程序文件"
-DOWNLOAD_URL="https://github.com/cjbind/cjbind/releases/download/$LATEST_TAG/$FILENAME"
+if [ "$USE_MIRROR" = true ]; then
+  DOWNLOAD_URL="https://gitcode.com/Cangjie-TPC/cjbind/releases/download/$LATEST_TAG/$FILENAME"
+  echo "    使用镜像: ${YELLOW}是${RESET}"
+else
+  DOWNLOAD_URL="https://github.com/cjbind/cjbind/releases/download/$LATEST_TAG/$FILENAME"
+  echo "    使用镜像: ${YELLOW}否${RESET}"
+fi
 echo "    源地址: ${CYAN}${DOWNLOAD_URL}${RESET}"
 echo "    目标路径: ${CYAN}${TARGET_DIR/#$HOME/~}/cjbind${RESET}"
 

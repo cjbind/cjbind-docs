@@ -60,10 +60,22 @@ Commit 时间：   2025-02-12 04:38:33 +0800
 curl -fsSL https://cjbind.zxilly.dev/install.sh | bash
 ```
 
+可以使用镜像源加速下载：
+
+```shell
+curl -fsSL https://cjbind.zxilly.dev/install.sh | bash -s -- --mirror
+```
+
 #### Windows
 
 ```powershell
 irm https://cjbind.zxilly.dev/install.ps1 | iex
+```
+
+可以使用镜像源加速下载：
+
+```powershell
+irm https://cjbind.zxilly.dev/install.ps1 | iex -args "--mirror"
 ```
 
 ## 源码安装
