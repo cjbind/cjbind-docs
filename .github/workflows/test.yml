@@ -28,7 +28,7 @@ jobs:
       - name: Setup Cangjie
         uses: Zxilly/setup-cangjie@v1
         with:
-          channel: "canary"
+          channel: "lts"
           token: ${{ secrets.GITCODE_TOKEN }}
 
       - name: Test unix install
