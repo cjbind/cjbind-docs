@@ -17,6 +17,11 @@ jobs:
             sys: "darwin"
           - runner: "windows-2025"
             sys: "windows"
+            shell: "powershell"
+          - runner: "windows-2025"
+            sys: "windows"
+            shell: "pwsh"
+        mirror: ["", "--mirror"]
       fail-fast: false
 
     runs-on: ${{ matrix.os.runner }}
@@ -35,14 +40,14 @@ jobs:
         if: matrix.os.sys != 'windows'
         run: |
           chmod +x public/install.sh
-          bash public/install.sh
+          bash public/install.sh ${{ matrix.mirror }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Test windows install
         if: matrix.os.sys == 'windows'
         run: |
-          powershell -File public/install.ps1
+          ${{ matrix.os.shell }} -File public/install.ps1 ${{ matrix.mirror }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

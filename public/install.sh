@@ -1,7 +1,7 @@
 #!/bin/bash
 set -eo pipefail
 
-# 检查是否使用镜像源
+# Check if using mirror source
 USE_MIRROR=false
 for arg in "$@"; do
   if [ "$arg" = "--mirror" ] || [ "$arg" = "-m" ]; then
@@ -24,73 +24,73 @@ else
   RESET=""
 fi
 
-error() { echo "${RED}错误: $1${RESET}" >&2; exit 1; }
-success() { echo "${GREEN}√ $1${RESET}"; }
+error() { echo "${RED}Error: $1${RESET}" >&2; exit 1; }
+success() { echo "${GREEN}$1${RESET}"; }
 info() { echo "${CYAN}▶ $1${RESET}"; }
 step() { echo "${YELLOW}[$1/4] $2${RESET}"; }
 
 trap 'printf "\e[0m"' EXIT
 
-step 1 "获取最新版本"
+step 1 "Fetching latest version"
 
 LATEST_TAG=$(curl -fsS ${GITHUB_TOKEN:+-H "Authorization: token $GITHUB_TOKEN"} \
   https://api.github.com/repos/cjbind/cjbind/releases/latest \
   | grep '"tag_name":' \
-  | sed -E 's/.*"([^"]+)".*/\1/') || error "无法获取最新版本"
+  | sed -E 's/.*"([^"]+)".*/\1/') || error "Failed to get latest version"
 
-success "检测到最新版本: $LATEST_TAG"
+success "Latest version detected: $LATEST_TAG"
 
-step 2 "检测系统环境"
+step 2 "Detecting system environment"
 OS=$(uname -s | tr '[:upper:]' '[:lower:]')
 ARCH=$(uname -m)
 
 case "$ARCH" in
   x86_64)  ARCH="x64" ;;
   aarch64|arm64) ARCH="arm64" ;;
-  *) error "不支持的架构: $ARCH" ;;
+  *) error "Unsupported architecture: $ARCH" ;;
 esac
 
 case "$OS" in
   linux)
     FILENAME="cjbind-linux-$ARCH"
-    info "检测到 Linux ($ARCH) 系统" ;;
+    info "Linux ($ARCH) system detected" ;;
   darwin)
-    [ "$ARCH" = "arm64" ] || error "macOS 仅支持 Apple Silicon (arm64)"
+    [ "$ARCH" = "arm64" ] || error "macOS only supports Apple Silicon (arm64)"
     FILENAME="cjbind-darwin-arm64"
-    info "检测到 macOS (Apple Silicon)" ;;
-  *) error "不支持的操作系统: $OS" ;;
+    info "macOS (Apple Silicon) detected" ;;
+  *) error "Unsupported operating system: $OS" ;;
 esac
 
-step 3 "创建安装目录"
+step 3 "Creating installation directory"
 TARGET_DIR="${HOME}/.cjpm/bin"
-mkdir -p "$TARGET_DIR" || error "无法创建目录: $TARGET_DIR"
-success "目录已创建: ${TARGET_DIR/#$HOME/~}"
+mkdir -p "$TARGET_DIR" || error "Failed to create directory: $TARGET_DIR"
+success "Directory created: ${TARGET_DIR/#$HOME/~}"
 
-step 4 "下载程序文件"
+step 4 "Downloading program file"
 if [ "$USE_MIRROR" = true ]; then
   DOWNLOAD_URL="https://gitcode.com/Cangjie-TPC/cjbind/releases/download/$LATEST_TAG/$FILENAME"
-  echo "    使用镜像: ${YELLOW}是${RESET}"
+  echo "    Using mirror: ${YELLOW}Yes${RESET}"
 else
   DOWNLOAD_URL="https://github.com/cjbind/cjbind/releases/download/$LATEST_TAG/$FILENAME"
-  echo "    使用镜像: ${YELLOW}否${RESET}"
+  echo "    Using mirror: ${YELLOW}No${RESET}"
 fi
-echo "    源地址: ${CYAN}${DOWNLOAD_URL}${RESET}"
-echo "    目标路径: ${CYAN}${TARGET_DIR/#$HOME/~}/cjbind${RESET}"
+echo "    Source URL: ${CYAN}${DOWNLOAD_URL}${RESET}"
+echo "    Target path: ${CYAN}${TARGET_DIR/#$HOME/~}/cjbind${RESET}"
 
 if command -v wget &> /dev/null; then
   DOWNLOAD_CMD="wget --progress=bar -O"
 elif command -v curl &> /dev/null; then
   DOWNLOAD_CMD="curl -# -L -o"
 else
-  error "需要 curl 或 wget 来下载文件"
+  error "curl or wget required to download files"
 fi
 
-$DOWNLOAD_CMD "$TARGET_DIR/cjbind" "$DOWNLOAD_URL" || error "下载失败"
+$DOWNLOAD_CMD "$TARGET_DIR/cjbind" "$DOWNLOAD_URL" || error "Download failed"
 
 chmod +x "$TARGET_DIR/cjbind"
-success "文件验证通过 ($(file -b "$TARGET_DIR/cjbind" | cut -d ',' -f1))"
+success "File verification passed ($(file -b "$TARGET_DIR/cjbind" | cut -d ',' -f1))"
 
-echo "${GREEN}=== 安装成功 ===${RESET}"
-echo "程序已安装到: ${CYAN}${TARGET_DIR/#$HOME/~}/cjbind${RESET}"
-echo "${YELLOW}提示: 如需全局使用，请将以下路径添加到环境变量:${RESET}"
+echo "${GREEN}=== Installation successful ===${RESET}"
+echo "Program installed to: ${CYAN}${TARGET_DIR/#$HOME/~}/cjbind${RESET}"
+echo "${YELLOW}Tip: To use globally, add the following path to environment variables:${RESET}"
 echo "export PATH=\"\$PATH:$TARGET_DIR\""
