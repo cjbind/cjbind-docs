@@ -8,7 +8,6 @@ const zhGuides: DefaultTheme.NavItemWithLink[] = [
   { text: '安装', link: '/guide/install' },
   { text: '命令行使用', link: '/guide/command_line' },
   { text: '已知限制', link: '/guide/limitation' },
-  { text: 'LLM', link: '/guide/llm' },
 ]
 
 const enGuides: DefaultTheme.NavItemWithLink[] = [
@@ -17,7 +16,6 @@ const enGuides: DefaultTheme.NavItemWithLink[] = [
   { text: 'Installation', link: '/en/guide/install' },
   { text: 'Command Line', link: '/en/guide/command_line' },
   { text: 'Limitations', link: '/en/guide/limitation' },
-  { text: 'LLM', link: '/en/guide/llm' },
 ]
 
 export default defineConfig({
