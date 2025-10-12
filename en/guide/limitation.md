@@ -16,7 +16,7 @@ There are plans to simulate unions using `VArray`, but this has not been impleme
 
 ## Macros
 
-Cangjie currently lacks a suitable expression parsing library, making it impossible to directly evaluate macro values. When encountering macros, `cjbind` skips the entire `#define`.
+Cangjie currently lacks a suitable expression parsing library, making it impossible to directly evaluate macro values. When encountering macros, `cjbind` constructs a C file and then calls `clang` to evaluate the expression value.
 
 There are plans to add support for simple string and numeric macros, but this has not been implemented yet.
 
