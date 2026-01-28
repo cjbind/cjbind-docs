@@ -1,12 +1,36 @@
 #!/bin/bash
 set -eo pipefail
 
-# Check if using mirror source
+show_help() {
+  cat << EOF
+Usage: install.sh [OPTIONS]
+
+Options:
+  -m, --mirror    Use mirror source (gitcode.com)
+  -d, --dynamic   Install dynamic build (requires system LLVM, smaller size)
+  -h, --help      Show this help message
+
+By default, the static build is installed (includes LLVM, larger size).
+
+Examples:
+  ./install.sh              # Install static build from GitHub
+  ./install.sh --dynamic    # Install dynamic build from GitHub
+  ./install.sh --mirror     # Install static build from mirror
+  ./install.sh -d -m        # Install dynamic build from mirror
+EOF
+  exit 0
+}
+
+# Check command line arguments
 USE_MIRROR=false
+USE_STATIC=true
 for arg in "$@"; do
   if [ "$arg" = "--mirror" ] || [ "$arg" = "-m" ]; then
     USE_MIRROR=true
-    break
+  elif [ "$arg" = "--dynamic" ] || [ "$arg" = "-d" ]; then
+    USE_STATIC=false
+  elif [ "$arg" = "--help" ] || [ "$arg" = "-h" ]; then
+    show_help
   fi
 done
 
@@ -50,16 +74,27 @@ case "$ARCH" in
   *) error "Unsupported architecture: $ARCH" ;;
 esac
 
+LINK_TYPE="dynamic"
+if [ "$USE_STATIC" = true ]; then
+  LINK_TYPE="static"
+fi
+
 case "$OS" in
   linux)
-    FILENAME="cjbind-linux-$ARCH"
+    FILENAME="cjbind-linux-$ARCH-$LINK_TYPE"
     info "Linux ($ARCH) system detected" ;;
   darwin)
     [ "$ARCH" = "arm64" ] || error "macOS only supports Apple Silicon (arm64)"
-    FILENAME="cjbind-darwin-arm64"
+    FILENAME="cjbind-darwin-arm64-$LINK_TYPE"
     info "macOS (Apple Silicon) detected" ;;
   *) error "Unsupported operating system: $OS" ;;
 esac
+
+if [ "$USE_STATIC" = true ]; then
+  info "Link type: Static (includes LLVM, larger size)"
+else
+  info "Link type: Dynamic (requires system LLVM, smaller size)"
+fi
 
 step 3 "Creating installation directory"
 TARGET_DIR="${HOME}/.cjpm/bin"

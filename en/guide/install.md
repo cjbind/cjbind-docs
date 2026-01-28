@@ -54,29 +54,60 @@ Clean Build:     true
 
 ### Script Installation
 
+The installation script installs the **static build** by default (includes LLVM, larger size but no additional dependencies). If you need the **dynamic build** (smaller size but requires system LLVM), use the `--dynamic` parameter.
+
 #### Linux/macOS
+
+Install static build (default):
 
 ```shell
 curl -fsSL https://cjbind.zxilly.dev/install.sh | bash
 ```
 
-You can use mirror sources to accelerate download:
+Install dynamic build:
 
 ```shell
+curl -fsSL https://cjbind.zxilly.dev/install.sh | bash -s -- --dynamic
+```
+
+Use mirror source to accelerate download:
+
+```shell
+# Static build
 curl -fsSL https://cjbind.zxilly.dev/install.sh | bash -s -- --mirror
+
+# Dynamic build
+curl -fsSL https://cjbind.zxilly.dev/install.sh | bash -s -- --dynamic --mirror
 ```
 
 #### Windows
+
+Install static build (default):
 
 ```powershell
 irm https://cjbind.zxilly.dev/install.ps1 | iex
 ```
 
-You can use mirror sources to accelerate download:
+Install dynamic build:
 
 ```powershell
-& ([scriptblock]::Create((irm https://cjbind.zxilly.dev/install.ps1))) --mirror
+& ([scriptblock]::Create((irm https://cjbind.zxilly.dev/install.ps1))) --dynamic
 ```
+
+Use mirror source to accelerate download:
+
+```powershell
+# Static build
+& ([scriptblock]::Create((irm https://cjbind.zxilly.dev/install.ps1))) --mirror
+
+# Dynamic build
+& ([scriptblock]::Create((irm https://cjbind.zxilly.dev/install.ps1))) --dynamic --mirror
+```
+
+::: tip Build Selection
+- **Static build**: ~77-92 MB, includes complete LLVM, no additional dependencies required, recommended
+- **Dynamic build**: ~3-6 MB, requires system LLVM installation, suitable for size-sensitive scenarios
+:::
 
 ## Source Installation
 

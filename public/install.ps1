@@ -4,12 +4,39 @@ try {
 } catch {
     $OutputEncoding = [System.Text.Encoding]::UTF8
 }
-# 检查是否使用镜像
+
+function Show-Help {
+    Write-Host @"
+Usage: install.ps1 [OPTIONS]
+
+Options:
+  -m, --mirror    Use mirror source (gitcode.com)
+  -d, --dynamic   Install dynamic build (requires system LLVM, smaller size)
+  -h, --help      Show this help message
+
+By default, the static build is installed (includes LLVM, larger size).
+
+Examples:
+  .\install.ps1              # Install static build from GitHub
+  .\install.ps1 --dynamic    # Install dynamic build from GitHub
+  .\install.ps1 --mirror     # Install static build from mirror
+  .\install.ps1 -d -m        # Install dynamic build from mirror
+"@
+    exit 0
+}
+
+# 检查命令行参数
 $UseMirror = $false
+$UseStatic = $true
 foreach ($arg in $args) {
     if ($arg -eq "--mirror" -or $arg -eq "-m") {
         $UseMirror = $true
-        break
+    }
+    elseif ($arg -eq "--dynamic" -or $arg -eq "-d") {
+        $UseStatic = $false
+    }
+    elseif ($arg -eq "--help" -or $arg -eq "-h") {
+        Show-Help
     }
 }
 
@@ -51,17 +78,24 @@ catch {
     exit 1
 }
 
+$linkType = if ($UseStatic) { "static" } else { "dynamic" }
+$filename = "cjbind-windows-x64-$linkType.exe"
+
 if ($UseMirror) {
-    $downloadUrl = "https://gitcode.com/Cangjie-TPC/cjbind/releases/download/$latestTag/cjbind-windows-x64.exe"
+    $downloadUrl = "https://gitcode.com/Cangjie-TPC/cjbind/releases/download/$latestTag/$filename"
     $mirrorStatus = "Yes"
 } else {
-    $downloadUrl = "https://github.com/cjbind/cjbind/releases/download/$latestTag/cjbind-windows-x64.exe"
+    $downloadUrl = "https://github.com/cjbind/cjbind/releases/download/$latestTag/$filename"
     $mirrorStatus = "No"
 }
+
+$linkTypeDesc = if ($UseStatic) { "Static (includes LLVM, larger size)" } else { "Dynamic (requires system LLVM, smaller size)" }
+
 $destination = "$targetDir\cjbind.exe"
 try {
     Write-Host "[3/3] Downloading program file..." -ForegroundColor Cyan
     Write-Host "    Using mirror: $mirrorStatus" -ForegroundColor Yellow
+    Write-Host "    Link type: $linkTypeDesc" -ForegroundColor Cyan
     Write-Host "    Download URL: $downloadUrl"
     Write-Host "    Save path: $destination`n"
 

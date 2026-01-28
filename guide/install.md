@@ -54,29 +54,60 @@ Commit 时间：   2025-02-12 04:38:33 +0800
 
 ### 脚本安装
 
+安装脚本默认安装**静态链接版本**（包含 LLVM，文件较大但无需额外依赖）。如果需要**动态链接版本**（文件较小但需要系统已安装 LLVM），可以使用 `--dynamic` 参数。
+
 #### Linux/macOS
+
+安装静态链接版本（默认）：
 
 ```shell
 curl -fsSL https://cjbind.zxilly.dev/install.sh | bash
 ```
 
-可以使用镜像源加速下载：
+安装动态链接版本：
 
 ```shell
+curl -fsSL https://cjbind.zxilly.dev/install.sh | bash -s -- --dynamic
+```
+
+使用镜像源加速下载：
+
+```shell
+# 静态链接版本
 curl -fsSL https://cjbind.zxilly.dev/install.sh | bash -s -- --mirror
+
+# 动态链接版本
+curl -fsSL https://cjbind.zxilly.dev/install.sh | bash -s -- --dynamic --mirror
 ```
 
 #### Windows
+
+安装静态链接版本（默认）：
 
 ```powershell
 irm https://cjbind.zxilly.dev/install.ps1 | iex
 ```
 
-可以使用镜像源加速下载：
+安装动态链接版本：
 
 ```powershell
-& ([scriptblock]::Create((irm https://cjbind.zxilly.dev/install.ps1))) --mirror
+& ([scriptblock]::Create((irm https://cjbind.zxilly.dev/install.ps1))) --dynamic
 ```
+
+使用镜像源加速下载：
+
+```powershell
+# 静态链接版本
+& ([scriptblock]::Create((irm https://cjbind.zxilly.dev/install.ps1))) --mirror
+
+# 动态链接版本
+& ([scriptblock]::Create((irm https://cjbind.zxilly.dev/install.ps1))) --dynamic --mirror
+```
+
+::: tip 版本选择
+- **静态链接版本**：文件约 77-92 MB，包含完整的 LLVM，无需额外依赖，推荐使用
+- **动态链接版本**：文件约 3-6 MB，需要系统已安装 LLVM，适合对文件大小敏感的场景
+:::
 
 ## 源码安装
 

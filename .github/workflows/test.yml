@@ -33,7 +33,8 @@ jobs:
       - name: Setup Cangjie
         uses: Zxilly/setup-cangjie@v1
         with:
-          channel: "lts"
+          channel: "nightly"
+          version: "1.1.0-alpha.20260127020001"
           token: ${{ secrets.GITCODE_TOKEN }}
 
       - name: Test unix install
