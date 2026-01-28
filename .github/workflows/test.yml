@@ -67,15 +67,40 @@ jobs:
 
           # Try to run with error capture
           try {
-            $output = & cjbind --version 2>&1
-            Write-Host "Output: $output"
-            if ($LASTEXITCODE -ne 0) {
-              Write-Host "ERROR: Exit code $LASTEXITCODE"
-              Write-Host "Checking dependencies with dumpbin..."
-              if (Get-Command dumpbin -ErrorAction SilentlyContinue) {
-                dumpbin /dependents "$env:USERPROFILE\.cjpm\bin\cjbind.exe"
+            $process = Start-Process -FilePath "cjbind" -ArgumentList "--version" -NoNewWindow -PassThru -Wait -RedirectStandardOutput "stdout.txt" -RedirectStandardError "stderr.txt"
+
+            Write-Host "`n=== STDOUT ==="
+            if (Test-Path "stdout.txt") { Get-Content "stdout.txt" }
+
+            Write-Host "`n=== STDERR ==="
+            if (Test-Path "stderr.txt") { Get-Content "stderr.txt" }
+
+            Write-Host "`n=== Exit Code: $($process.ExitCode) ==="
+
+            if ($process.ExitCode -eq -1073741511) {
+              Write-Host "`nERROR 0xC0000139: STATUS_ENTRYPOINT_NOT_FOUND"
+              Write-Host "This means a required DLL is missing or incompatible.`n"
+
+              Write-Host "Attempting to check dependencies..."
+
+              # Try dumpbin
+              $dumpbinPath = "${env:ProgramFiles}\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\*\bin\Hostx64\x64\dumpbin.exe"
+              $dumpbin = Get-Item $dumpbinPath -ErrorAction SilentlyContinue | Select-Object -First 1
+
+              if ($dumpbin) {
+                Write-Host "`n=== DLL Dependencies (dumpbin) ==="
+                & $dumpbin.FullName /dependents "$env:USERPROFILE\.cjpm\bin\cjbind.exe"
+              } else {
+                Write-Host "dumpbin not found"
               }
-              exit $LASTEXITCODE
+
+              Write-Host "`n=== System PATH ==="
+              $env:PATH -split ';' | ForEach-Object { Write-Host "  $_" }
+
+              exit 1
+            } elseif ($process.ExitCode -ne 0) {
+              Write-Host "ERROR: Non-zero exit code"
+              exit $process.ExitCode
             }
           } catch {
             Write-Host "EXCEPTION: $_"
