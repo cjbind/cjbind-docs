@@ -1,8 +1,7 @@
 import { defineConfig } from 'vitepress'
-import type { DefaultTheme } from 'vitepress'
 import cangjie from './cangjie.tmLanguage.json'
 
-const zhGuides: DefaultTheme.NavItemWithLink[] = [
+const zhGuides = [
   { text: '简介', link: '/guide/' },
   { text: '快速开始', link: '/guide/quick_start' },
   { text: '安装', link: '/guide/install' },
@@ -10,7 +9,7 @@ const zhGuides: DefaultTheme.NavItemWithLink[] = [
   { text: '已知限制', link: '/guide/limitation' },
 ]
 
-const enGuides: DefaultTheme.NavItemWithLink[] = [
+const enGuides = [
   { text: 'Introduction', link: '/en/guide/' },
   { text: 'Quick Start', link: '/en/guide/quick_start' },
   { text: 'Installation', link: '/en/guide/install' },
