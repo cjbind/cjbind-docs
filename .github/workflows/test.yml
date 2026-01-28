@@ -51,6 +51,40 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Test cjbind
+      - name: Test cjbind (Windows - with error capture)
+        if: matrix.os.sys == 'windows'
+        run: |
+          Write-Host "Testing cjbind installation..."
+          Write-Host "Executable path: $env:USERPROFILE\.cjpm\bin\cjbind.exe"
+
+          # Check if file exists
+          if (Test-Path "$env:USERPROFILE\.cjpm\bin\cjbind.exe") {
+            Write-Host "File exists, size: $((Get-Item "$env:USERPROFILE\.cjpm\bin\cjbind.exe").Length) bytes"
+          } else {
+            Write-Host "ERROR: File not found!"
+            exit 1
+          }
+
+          # Try to run with error capture
+          try {
+            $output = & cjbind --version 2>&1
+            Write-Host "Output: $output"
+            if ($LASTEXITCODE -ne 0) {
+              Write-Host "ERROR: Exit code $LASTEXITCODE"
+              Write-Host "Checking dependencies with dumpbin..."
+              if (Get-Command dumpbin -ErrorAction SilentlyContinue) {
+                dumpbin /dependents "$env:USERPROFILE\.cjpm\bin\cjbind.exe"
+              }
+              exit $LASTEXITCODE
+            }
+          } catch {
+            Write-Host "EXCEPTION: $_"
+            Write-Host "Exception Type: $($_.Exception.GetType().FullName)"
+            Write-Host "Exception Message: $($_.Exception.Message)"
+            exit 1
+          }
+
+      - name: Test cjbind (Unix)
+        if: matrix.os.sys != 'windows'
         run: |
           cjbind --version
