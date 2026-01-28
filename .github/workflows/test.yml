@@ -34,7 +34,7 @@ jobs:
         uses: Zxilly/setup-cangjie@v2
         with:
           channel: "nightly"
-          version: "1.1.0-alpha.20260127020001"
+          version: "1.1.0-alpha.20260107020002"
 
       - name: Test unix install
         if: matrix.os.sys != 'windows'
