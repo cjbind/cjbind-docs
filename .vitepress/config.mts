@@ -6,6 +6,7 @@ const zhGuides = [
   { text: '快速开始', link: '/guide/quick_start' },
   { text: '安装', link: '/guide/install' },
   { text: '命令行使用', link: '/guide/command_line' },
+  { text: 'Objective-C 绑定', link: '/guide/objective_c' },
   { text: '已知限制', link: '/guide/limitation' },
 ]
 
@@ -14,6 +15,7 @@ const enGuides = [
   { text: 'Quick Start', link: '/en/guide/quick_start' },
   { text: 'Installation', link: '/en/guide/install' },
   { text: 'Command Line', link: '/en/guide/command_line' },
+  { text: 'Objective-C Bindings', link: '/en/guide/objective_c' },
   { text: 'Limitations', link: '/en/guide/limitation' },
 ]
 
