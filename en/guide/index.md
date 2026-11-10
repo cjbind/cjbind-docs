@@ -1,3 +1,8 @@
+---
+title: "Introduction to Cangjie FFI binding generation"
+description: "Learn how cjbind parses C headers into Cangjie foreign declarations, structures, and wrappers, and how generated bindings fit into your project."
+---
+
 # Introduction
 
 **[cjbind](https://github.com/cjbind/cjbind) can automatically generate Cangjie FFI bindings for C.**

@@ -1,3 +1,8 @@
+---
+title: "Generate Cangjie bindings for Objective-C"
+description: "Generate bindings for Objective-C classes, protocols, and methods. Compare runtime and compiler modes and review supported declarations and limitations."
+---
+
 # Objective-C Bindings
 
 `cjbind` can parse Objective-C headers and generate Cangjie bindings with the `--objc` option.

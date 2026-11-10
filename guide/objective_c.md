@@ -1,3 +1,8 @@
+---
+title: "生成 Objective-C 的仓颉绑定"
+description: "使用 cjbind 为 Objective-C 类、协议和方法生成仓颉绑定，比较 runtime 与 compiler 两种模式，并了解支持范围与使用限制。"
+---
+
 # Objective-C 绑定
 
 `cjbind` 可以通过 `--objc` 选项解析 Objective-C 头文件，并生成适用于仓颉的绑定代码。

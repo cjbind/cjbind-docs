@@ -1,3 +1,8 @@
+---
+title: "命令行参数与代码生成选项"
+description: "查阅 cjbind 的输入文件、输出目录、包名、Clang 参数和 Objective-C 生成选项，配置适合项目的仓颉 FFI 绑定。"
+---
+
 # 命令行用法
 
 如果已经按照 [安装](/guide/install) 中的说明安装了 `cjbind`，并且可以通过 `cjbind --version` 命令查看版本号，那么你可以使用 `cjbind` 命令来生成 FFI 绑定代码。

@@ -1,3 +1,8 @@
+---
+title: "安装 cjbind 与 libclang"
+description: "在 Windows、Linux 或 macOS 上安装 cjbind，选择静态或动态构建、配置 libclang，并了解脚本安装和源码构建步骤。"
+---
+
 # 安装
 
 ## 二进制安装

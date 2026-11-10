@@ -1,3 +1,8 @@
+---
+title: "Command-line and code generation options"
+description: "Configure cjbind input headers, output directories, package names, Clang arguments, and Objective-C options for your Cangjie FFI bindings."
+---
+
 # Command Line Usage
 
 If you have installed `cjbind` according to the instructions in [Installation](/en/guide/install) and can view the version number using the `cjbind --version` command, you can use the `cjbind` command to generate FFI binding code.

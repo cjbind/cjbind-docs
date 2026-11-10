@@ -1,3 +1,8 @@
+---
+title: "Create Cangjie bindings for Zstandard"
+description: "Generate bindings from Zstandard headers, create a cjpm project, call the compression library, and troubleshoot linking and runtime dependencies."
+---
+
 # Quick Start
 
 This tutorial demonstrates how to use the cjbind tool to generate Cangjie FFI bindings for the Zstandard (zstd) library and illustrates the cross-language calling process through practical examples.

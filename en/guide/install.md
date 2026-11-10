@@ -1,3 +1,8 @@
+---
+title: "Install cjbind and libclang"
+description: "Install cjbind on Windows, Linux, or macOS. Choose static or dynamic builds, configure libclang, and follow script or source installation steps."
+---
+
 # Installation
 
 ## Binary Installation

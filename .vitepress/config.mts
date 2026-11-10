@@ -21,7 +21,30 @@ const enGuides = [
 
 export default defineConfig({
   title: "cjbind",
-  description: "自动生成仓颉到 C 库的 FFI 绑定代码",
+  description: "从 C 和 Objective-C 头文件生成仓颉 FFI 绑定代码",
+  lang: 'zh-CN',
+
+  transformPageData(pageData) {
+    if (pageData.relativePath === '404.md') return
+    const path = pageData.relativePath.replace(/index\.md$/, '').replace(/\.md$/, '')
+    const chinesePath = path.replace(/^en\//, '')
+    const origin = 'https://cjbind.zxilly.dev/'
+    const canonical = origin + path
+    const english = path.startsWith('en/')
+    pageData.frontmatter.head ??= []
+    pageData.frontmatter.head.push(
+      ['link', { rel: 'canonical', href: canonical }],
+      ['link', { rel: 'alternate', hreflang: 'zh-CN', href: origin + chinesePath }],
+      ['link', { rel: 'alternate', hreflang: 'en-US', href: origin + 'en/' + chinesePath }],
+      ['link', { rel: 'alternate', hreflang: 'x-default', href: origin + chinesePath }],
+      ['meta', { property: 'og:type', content: 'website' }],
+      ['meta', { property: 'og:site_name', content: 'cjbind' }],
+      ['meta', { property: 'og:title', content: `${pageData.title} | cjbind` }],
+      ['meta', { property: 'og:description', content: pageData.description }],
+      ['meta', { property: 'og:url', content: canonical }],
+      ['meta', { property: 'og:locale', content: english ? 'en_US' : 'zh_CN' }],
+    )
+  },
 
   locales: {
     root: {
@@ -76,6 +99,7 @@ export default defineConfig({
       }
     },
     en: {
+      description: 'Generate Cangjie FFI bindings from C and Objective-C headers.',
       label: 'English',
       lang: 'en-US',
       link: '/en/',
@@ -192,7 +216,10 @@ export default defineConfig({
       {
         defer: "true",
         src: 'https://trail.learningman.top/script.js',
-        'data-website-id': 'ee8c2794-9441-4be4-8fb1-185cbda5c3a6'
+        'data-website-id': 'ee8c2794-9441-4be4-8fb1-185cbda5c3a6',
+        'data-domains': 'cjbind.zxilly.dev',
+        'data-exclude-search': 'true',
+        'data-exclude-hash': 'true',
       }
     ]
   ],

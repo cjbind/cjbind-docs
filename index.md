@@ -1,4 +1,6 @@
 ---
+title: "仓颉 C 与 Objective-C FFI 绑定生成器"
+description: "使用 cjbind 从 C 和 Objective-C 头文件生成仓颉 FFI 绑定。了解安装、Zstandard 示例、命令行选项与 ABI 限制，减少手写绑定代码。"
 layout: home
 
 hero:

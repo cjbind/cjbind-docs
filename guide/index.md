@@ -1,3 +1,8 @@
+---
+title: "仓颉 FFI 绑定生成简介"
+description: "了解 cjbind 如何解析 C 头文件并生成仓颉 foreign 声明、结构体与封装代码，以及使用绑定前需要了解的基本流程。"
+---
+
 # 简介
 
 **[cjbind](https://github.com/cjbind/cjbind) 可以自动生成 C 的仓颉 FFI 绑定代码。**

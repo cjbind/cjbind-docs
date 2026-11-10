@@ -1,3 +1,8 @@
+---
+title: "用 Zstandard 创建仓颉 FFI 绑定"
+description: "从 Zstandard 头文件生成仓颉绑定，创建 cjpm 项目、调用压缩库并完成编译运行，附链接与运行库问题排查。"
+---
+
 # 快速开始
 
 本教程将演示如何使用 cjbind 工具为 Zstandard (zstd) 库生成仓颉语言 FFI 绑定，并通过实际示例展示跨语言调用过程。

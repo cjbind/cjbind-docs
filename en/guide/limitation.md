@@ -1,3 +1,8 @@
+---
+title: "FFI and ABI support and limitations"
+description: "Review cjbind support for bitfields, unions, alignment, opaque types, flexible arrays, calling conventions, and Objective-C semantics before using generated bindings."
+---
+
 # Known Limitations
 
 The following cases need extra attention when generating bindings with `cjbind`.
